@@ -42,14 +42,12 @@ import static com.jenkov.MyBenchmark.*;
 @Warmup(iterations = NUMBER_OF_WARM_UP_ITERATIONS)
 @Measurement(iterations = NUMBER_OF_MEASUREMENT_ITERATIONS)
 @Fork(NUMBER_OF_FORKS)
-@BenchmarkMode({Mode.Throughput, Mode.AverageTime})
-@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@BenchmarkMode(Mode.Throughput)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
 public abstract class MyBenchmark {
     static final int NUMBER_OF_MEASUREMENT_ITERATIONS = 5;
     static final int NUMBER_OF_WARM_UP_ITERATIONS = 2;
     static final int NUMBER_OF_FORKS = 1;
-
-    private static final int NUMBER_OF_CYCLES = 1_000_000;
 
     private Counter counter;
 
@@ -57,9 +55,7 @@ public abstract class MyBenchmark {
     public abstract void prepare();
 
     private void testMethod() {
-        for (int i = 0; i < NUMBER_OF_CYCLES; i++) {
-            counter.incrementAndGet();
-        }
+        counter.incrementAndGet();
     }
 
     @Benchmark
